@@ -480,10 +480,12 @@
           <h2>RSVP</h2>
           <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
         </header>
-        <p class="lede center">Please RSVP by <strong><span class="tbc">1 August 2027</span></strong>.</p>
+        <p class="lede center">Please RSVP by <strong>1 August 2027</strong>.</p>
         <p class="center fine">Your invitation will list the names we've reserved seats for. Please only RSVP for those named.</p>
 
-        <form class="rsvp-form" id="rsvp-form" novalidate>
+        <form class="rsvp-form" id="rsvp-form" name="rsvp" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="rsvp">
+          <p class="sr-only" aria-hidden="true"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
           <div class="field">
             <label for="names">Full name(s) of guests <small>(as on your invitation)</small></label>
             <input id="names" name="names" type="text" autocomplete="name" required>

@@ -16,10 +16,9 @@ const CONFIG = {
     details: "Guests arrive 2:30 pm, ceremony 3:00 pm on the Tulip Lawn. Dress code: formal. Details and RSVP: see our wedding website.",
   },
 
-  // RSVP form endpoint. Create a free form at https://formspree.io and paste
-  // its URL here, e.g. "https://formspree.io/f/abcdwxyz". Leave empty until
-  // RSVPs open; guests will see a friendly "not open yet" message.
-  rsvpEndpoint: "",
+  // RSVPs are collected by Netlify Forms (form name "rsvp") and emailed to
+  // kelsynovin@gmail.com. Set to "" to show a "not open yet" message instead.
+  rsvpEndpoint: "/",
 };
 
 /* ---- Mobile nav ---- */
@@ -211,8 +210,8 @@ form.addEventListener("submit", async (e) => {
   try {
     const res = await fetch(CONFIG.rsvpEndpoint, {
       method: "POST",
-      headers: { Accept: "application/json" },
-      body: new FormData(form),
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(new FormData(form)).toString(),
     });
     if (!res.ok) throw new Error(res.status);
     const attending = form.attending.value === "Yes";
