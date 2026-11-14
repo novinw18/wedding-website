@@ -1,0 +1,12 @@
+# Local Netlify folder
+.netlify
+
+# Build output (Netlify rebuilds this from netlify.toml)
+dist/
+
+# Original, full-size personal photos (web-sized copies live in assets/img)
+Novin-Kelsy-Photos/
+photos/
+
+# macOS
+.DS_Store

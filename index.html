@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kelsy &amp; Novin · 1st November 2027</title>
+  <meta name="description" content="Kelsy &amp; Novin are getting married on Monday 1st November 2027 at Ardour Milton Park, Bowral.">
+  <meta property="og:title" content="Kelsy &amp; Novin are getting married">
+  <meta property="og:description" content="Monday 1st November 2027 · Ardour Milton Park, Bowral NSW">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Reusable botanical drawings -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="tulip" viewBox="0 0 40 80">
+        <path d="M20 34 C20 50 20 64 20 78" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        <path d="M20 70 C11 63 6 53 8 44 C14 50 18 58 20 66" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M20 62 C27 56 32 48 31 40 C26 45 22 52 20 58" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M10 13 C9 26 13 34 20 34 C27 34 31 26 30 13 L25 20 L20 7 L15 20 Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M20 7 C17 16 17 27 20 34 M20 7 C23 16 23 27 20 34" fill="none" stroke="currentColor" stroke-width="1" opacity=".6"/>
+      </symbol>
+      <symbol id="sprig" viewBox="0 0 120 40">
+        <path d="M2 20 C40 18 80 18 118 20" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+        <g fill="none" stroke="currentColor" stroke-width="1.1">
+          <path d="M20 19.5 C16 12 18 6 24 4 C25 11 23 16 20 19.5Z"/>
+          <path d="M20 19.8 C16 27 18 33 24 35 C25 28 23 23 20 19.8Z"/>
+          <path d="M45 19 C41 11 43 5 49 3 C50 10 48 15 45 19Z"/>
+          <path d="M45 19.3 C41 27 43 33 49 35 C50 28 48 23 45 19.3Z"/>
+          <path d="M70 19 C66 11 68 5 74 3 C75 10 73 15 70 19Z"/>
+          <path d="M70 19.3 C66 27 68 33 74 35 C75 28 73 23 70 19.3Z"/>
+          <path d="M95 19.5 C91 12 93 6 99 4 C100 11 98 16 95 19.5Z"/>
+          <path d="M95 19.8 C91 27 93 33 99 35 C100 28 98 23 95 19.8Z"/>
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- Welcome questionnaire (shown before the site until a guest says yes).
+       Add ?welcome to the URL to see it again. -->
+  <div class="gate" id="gate" role="dialog" aria-modal="true" aria-labelledby="gate-q" hidden>
+    <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+    <div class="gate-card" id="gate-card">
+      <div class="gate-steps">
+        <div class="gate-step gate-step--ask is-active">
+          <div class="gate-badge" aria-hidden="true"><svg><use href="#tulip"/></svg></div>
+          <p class="gate-eyebrow">Save the date</p>
+          <h2 class="gate-q" id="gate-q">Want to come to our <span class="nowrap">wedding? <span class="gate-ring" aria-hidden="true">💍</span></span></h2>
+          <div class="gate-actions">
+            <button class="gate-yes" id="gate-yes" type="button">Yes</button>
+            <button class="gate-no" id="gate-no" type="button">No</button>
+          </div>
+          <p class="gate-hint" id="gate-hint" aria-live="polite"></p>
+        </div>
+        <!-- Quiz: any answer moves on. Edit the questions and answers freely. -->
+        <div class="gate-step gate-step--quiz">
+          <p class="gate-count">Question 1 of 4</p>
+          <div class="gate-progress"><span style="--p:.25"></span></div>
+          <h2 class="gate-q gate-q--quiz" tabindex="-1">How excited are you for our <span class="nowrap">wedding? 💌</span></h2>
+          <div class="gate-options">
+            <button type="button">SO excited!!</button>
+            <button type="button">I'm mainly excited for the food</button>
+            <button type="button">Open bar?</button>
+          </div>
+        </div>
+        <div class="gate-step gate-step--quiz">
+          <p class="gate-count">Question 2 of 4</p>
+          <div class="gate-progress"><span style="--p:.5"></span></div>
+          <h2 class="gate-q gate-q--quiz" tabindex="-1">Are you going to cry during the <span class="nowrap">ceremony? 🥺</span></h2>
+          <div class="gate-options">
+            <button type="button">Absolutely sobbing</button>
+            <button type="button">I'll try to hold it together</button>
+            <button type="button">No ❤️</button>
+          </div>
+        </div>
+        <div class="gate-step gate-step--quiz">
+          <p class="gate-count">Question 3 of 4</p>
+          <div class="gate-progress"><span style="--p:.75"></span></div>
+          <h2 class="gate-q gate-q--quiz" tabindex="-1">What are you bringing as a wedding <span class="nowrap">gift? 🎁</span></h2>
+          <div class="gate-options">
+            <button type="button">Cash, obviously</button>
+            <button type="button">Something from the registry</button>
+            <button type="button">My presence is the gift.</button>
+          </div>
+        </div>
+        <div class="gate-step gate-step--quiz">
+          <p class="gate-count">Question 4 of 4</p>
+          <div class="gate-progress"><span style="--p:1"></span></div>
+          <h2 class="gate-q gate-q--quiz" tabindex="-1">Will we see you on the dance <span class="nowrap">floor? 💃</span></h2>
+          <div class="gate-options">
+            <button type="button">All night long</button>
+            <button type="button">Only once the bangers come on</button>
+            <button type="button">I'll be guarding the cake</button>
+          </div>
+        </div>
+
+        <!-- Final pass message -->
+        <div class="gate-step gate-step--pass" aria-live="polite">
+          <p class="gate-pass-icon" aria-hidden="true">💌</p>
+          <h2 class="gate-pass" tabindex="-1">You passed!</h2>
+          <p class="gate-invited">You're invited!</p>
+          <p class="gate-status">Guest status: confirmed</p>
+          <button class="gate-enter" type="button" id="gate-enter">
+            <span>The celebration awaits</span>
+            <span class="gate-arrow" aria-hidden="true">↓</span>
+          </button>
+        </div>
+
+        <!-- Guest password -->
+        <div class="gate-step gate-step--password">
+          <div class="gate-badge gate-badge--lock" aria-hidden="true">🔐</div>
+          <p class="gate-count">One last thing</p>
+          <h2 class="gate-q gate-q--quiz" id="gate-pw-title" tabindex="-1">What's the secret <span class="nowrap">password?</span></h2>
+          <form class="gate-pw" id="gate-pw" novalidate>
+            <label class="sr-only" for="gate-pw-input">Guest password</label>
+            <input id="gate-pw-input" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="Enter password">
+            <button type="submit">Enter</button>
+          </form>
+          <p class="gate-hint" id="gate-pw-msg" aria-live="polite"></p>
+        </div>
+      </div>
+    </div>
+    <p class="gate-foot">With love, Kelsy &amp; Novin</p>
+  </div>
+
+  <!-- Opening reveal (shown once per visit) -->
+  <div class="intro" id="intro" aria-hidden="true">
+    <div class="intro-panel intro-panel--top"></div>
+    <div class="intro-panel intro-panel--bottom"></div>
+    <div class="intro-mark">
+      <span class="intro-names">K <em>&amp;</em> N</span>
+      <span class="intro-line"></span>
+      <span class="intro-date">01 · 11 · 2027</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var html = document.documentElement;
+      var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      var force = /[?&]welcome\b/.test(location.search);
+      var saidYes = false, skipIntro = false;
+      try { saidYes = localStorage.getItem("kn-unlocked") === "1"; } catch (e) {}
+      try { skipIntro = sessionStorage.getItem("kn-intro") === "1"; } catch (e) {}
+
+      if (!saidYes || force) {
+        // Show the questionnaire first; the opening reveal plays after "Yes".
+        html.classList.add("gate-open");
+        document.getElementById("gate").hidden = false;
+        skipIntro = false;
+      }
+      if (skipIntro || reduce) {
+        document.getElementById("intro").remove();
+      } else {
+        html.classList.add("intro-playing");
+        try { sessionStorage.setItem("kn-intro", "1"); } catch (e) {}
+      }
+    })();
+  </script>
+  <noscript><style>.intro,.gate{display:none}</style></noscript>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div>
+
+  <!-- Navigation -->
+  <header class="site-header" id="top">
+    <nav class="nav" aria-label="Main">
+      <a class="nav-mark" href="#home" aria-label="Kelsy and Novin, back to top">K<span>&amp;</span>N</a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
+        <span class="sr-only">Menu</span>
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#story">Our Story</a></li>
+        <li><a href="#schedule">The Day</a></li>
+        <li><a href="#venue">Venue &amp; Travel</a></li>
+        <li><a href="#stay">Stay</a></li>
+        <li><a href="#dress">Dress Code</a></li>
+        <li><a href="#faq">FAQs</a></li>
+        <li><a href="#highlands">Highlands</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a class="nav-cta" href="#rsvp">RSVP</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- 1. HOME -->
+    <section class="hero" id="home">
+      <div class="petals" aria-hidden="true"></div>
+      <svg class="hero-tulip hero-tulip--l" aria-hidden="true"><use href="#tulip"/></svg>
+      <svg class="hero-tulip hero-tulip--r" aria-hidden="true"><use href="#tulip"/></svg>
+      <div class="hero-inner">
+        <p class="eyebrow">Save the date</p>
+        <h1 class="names">Kelsy <span class="amp">&amp;</span> Novin</h1>
+        <p class="hero-sub">are getting married</p>
+        <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        <p class="hero-date">Monday 1<sup>st</sup> November 2027</p>
+        <p class="hero-place">Ardour Milton Park · Bowral, Southern Highlands NSW</p>
+
+        <div class="countdown" id="countdown" role="timer" aria-label="Countdown to the wedding">
+          <div><span data-unit="days">–</span><small>days</small></div>
+          <div><span data-unit="hours">–</span><small>hours</small></div>
+          <div><span data-unit="minutes">–</span><small>minutes</small></div>
+          <div><span data-unit="seconds">–</span><small>seconds</small></div>
+        </div>
+
+        <div class="hero-actions">
+          <div class="cal-wrap">
+            <button class="btn btn-ghost" id="cal-btn" aria-expanded="false" aria-controls="cal-menu">Add to calendar</button>
+            <div class="cal-menu" id="cal-menu" hidden>
+              <a id="cal-google" target="_blank" rel="noopener">Google Calendar</a>
+              <a id="cal-ics" href="#" download="kelsy-novin-wedding.ics">Apple Calendar</a>
+              <a id="cal-outlook" href="#" download="kelsy-novin-wedding.ics">Outlook (.ics)</a>
+            </div>
+          </div>
+          <a class="btn btn-primary" href="#rsvp">RSVP</a>
+        </div>
+        <p class="hero-note"><em>Formal invitation to follow.</em></p>
+      </div>
+    </section>
+
+    <!-- 2. OUR STORY -->
+    <section class="section" id="story">
+      <div class="container narrow">
+        <header class="section-head">
+          <p class="eyebrow">Chapter one</p>
+          <h2>Our Story</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+        <figure class="story-photo">
+          <img src="assets/img/us/harbour.jpg" alt="Kelsy and Novin dressed up by Sydney Harbour at dusk, with the Harbour Bridge behind them">
+        </figure>
+        <div class="story-grid">
+          <article class="story-card">
+            <h3>How we met</h3>
+            <p><span class="tbc">[Year, place, and one funny detail about how you met.]</span></p>
+          </article>
+          <article class="story-card">
+            <h3>The proposal</h3>
+            <p><span class="tbc">[Where, when, and who cried first.]</span></p>
+          </article>
+          <article class="story-card">
+            <h3>Why Bowral</h3>
+            <p><span class="tbc">[What drew you to Milton Park: the gardens, the Highlands, the long-weekend feel.]</span></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. THE DAY -->
+    <section class="section section--mist" id="schedule">
+      <div class="container narrow">
+        <header class="section-head">
+          <p class="eyebrow">Monday 1st November 2027</p>
+          <h2>The Day</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+
+        <ol class="timeline">
+          <li class="reveal">
+            <time>2:30 pm</time>
+            <div><h3>Guests arrive &amp; take their seats</h3><p>Tulip Lawn</p></div>
+          </li>
+          <li class="reveal">
+            <time>3:00 pm</time>
+            <div><h3>Ceremony</h3><p>Tulip Lawn</p></div>
+          </li>
+          <li class="reveal">
+            <time>4:00 pm</time>
+            <div><h3>Canapé hour: drinks &amp; lawn games</h3><p>Gardens · 4:00 – 5:00 pm</p></div>
+          </li>
+          <li class="reveal">
+            <time>5:30 pm</time>
+            <div><h3>Reception begins</h3><p>The Ballroom: three-course dinner, speeches, cake &amp; dancing</p></div>
+          </li>
+          <li class="reveal">
+            <time>11:00 pm</time>
+            <div><h3>Carriages</h3><p>Time to head home (or upstairs)</p></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 4 & 5. VENUE + GETTING THERE -->
+    <section class="section" id="venue">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Where it's all happening</p>
+          <h2>The Venue</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+
+        <figure class="venue-banner">
+          <img src="assets/img/venue/estate.jpg" alt="The historic Milton Park homestead lit up at dusk, surrounded by gardens" loading="lazy">
+        </figure>
+
+        <div class="venue-grid">
+          <div class="venue-copy">
+            <h3 class="venue-name">Ardour Milton Park</h3>
+            <p class="address">200 Horderns Road, Bowral NSW 2576</p>
+            <p>A historic country estate set in landscaped gardens in the Southern Highlands. The ceremony will be held on the <strong>Tulip Lawn</strong>, followed by drinks in the gardens and dinner in the <strong>Ballroom</strong>.</p>
+            <ol class="estate-path" aria-label="How the day moves around the estate">
+              <li><span>Tulip Lawn</span><small>Ceremony</small></li>
+              <li><span>Gardens</span><small>Canapés</small></li>
+              <li><span>Ballroom</span><small>Reception</small></li>
+            </ol>
+            <a class="btn btn-ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ardour+Milton+Park%2C+200+Horderns+Road%2C+Bowral+NSW+2576" target="_blank" rel="noopener">Get directions</a>
+          </div>
+          <div class="map-frame">
+            <iframe title="Map of Ardour Milton Park, Bowral" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=Ardour%20Milton%20Park%2C%20200%20Horderns%20Road%2C%20Bowral%20NSW%202576&amp;z=13&amp;output=embed"></iframe>
+          </div>
+        </div>
+
+        <div class="spots">
+          <figure class="spot">
+            <img src="assets/img/venue/tulip-lawn.jpg" alt="The Tulip Lawn: a wide, empty green lawn ringed by blossoming rhododendrons and trees" loading="lazy">
+            <figcaption>
+              <p class="card-kicker">Ceremony · 3:00 pm</p>
+              <h4>The Tulip Lawn</h4>
+              <p>Where we'll say "I do", under the old trees and spring blossom.</p>
+            </figcaption>
+          </figure>
+          <figure class="spot">
+            <img src="assets/img/venue/canape-terrace.jpg" alt="An ivy-covered garden pavilion with arched windows glowing at dusk, beside a manicured lawn" loading="lazy">
+            <figcaption>
+              <p class="card-kicker">Canapé hour · 4:00 – 5:00 pm</p>
+              <h4>The Gardens</h4>
+              <p>Canapés, drinks and lawn games in the gardens.</p>
+            </figcaption>
+          </figure>
+        </div>
+
+        <h3 class="sub-head" id="travel">Getting there</h3>
+        <div class="card-grid">
+          <article class="info-card">
+            <p class="card-kicker">Recommended</p>
+            <h4>By car</h4>
+            <p>Bowral is roughly 1.5 hours from Sydney CBD via the Hume Motorway (M31). Free on-site parking is available at Milton Park.</p>
+          </article>
+          <article class="info-card">
+            <h4>By train</h4>
+            <p>The Southern Highlands line runs to Bowral station. It's a short taxi or rideshare from there to Milton Park. Rideshare in the Highlands can be thin, so book a local taxi in advance.</p>
+          </article>
+          <article class="info-card">
+            <h4>Getting home</h4>
+            <p><span class="tbc">[Shuttle bus from the venue to Bowral town centre at 11:00 pm? Confirm if arranging one.]</span></p>
+            <p>Please don't drink and drive. Plan your ride before the day.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. WHERE TO STAY -->
+    <section class="section section--cream" id="stay">
+      <div class="container narrow">
+        <header class="section-head">
+          <p class="eyebrow">Make a weekend of it</p>
+          <h2>Where to Stay</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+        <p class="lede">We recommend staying the night (or two). It's a long drive back after a big night.</p>
+
+        <article class="stay-feature">
+          <div>
+            <p class="card-kicker">On site · guest rate</p>
+            <h3>Ardour Milton Park</h3>
+            <p>Stay where the party is, with no driving at the end of the night. We've arranged a guest rate for a <strong>one-night stay, 1st – 2nd November 2027</strong> (check in on the wedding day, check out the morning after).</p>
+          </div>
+          <div class="promo">
+            <p class="promo-label">Promo code</p>
+            <button class="promo-code" type="button" data-copy="WED01NOV27" aria-label="Copy promo code WED01NOV27">WED01NOV27</button>
+            <p class="promo-hint" aria-live="polite">Tap to copy</p>
+            <a class="btn btn-primary" target="_blank" rel="noopener"
+               href="https://book-directonline.com/properties/MILTONPARKDIRECT?locale=en&amp;promocode=WED01NOV27&amp;checkInDate=2027-11-01&amp;checkOutDate=2027-11-02&amp;items[0][adults]=2&amp;items[0][children]=0&amp;items[0][infants]=0&amp;currency=AUD&amp;trackPage=yes">Book your room</a>
+            <p class="fine">The promo code and dates are already filled in.</p>
+          </div>
+        </article>
+
+        <div class="card-grid card-grid--2">
+          <article class="info-card">
+            <h4>Bowral town centre</h4>
+            <p>Plenty of hotels, B&amp;Bs and Airbnbs, about <span class="tbc">[5–10]</span> minutes away.</p>
+          </article>
+          <article class="info-card">
+            <h4>Nearby towns</h4>
+            <p>Mittagong, Moss Vale and Berrima all offer more options.</p>
+          </article>
+        </div>
+        <p class="tip"><strong>Tip:</strong> the Highlands books out fast in spring. Lock something in early.</p>
+      </div>
+    </section>
+
+    <!-- 7. DRESS CODE -->
+    <section class="section" id="dress">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">Dress code</p>
+          <h2>Formal</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+        <p class="lede center">We'd love everyone to dress up with us.</p>
+
+        <div class="dress-grid">
+          <article class="info-card">
+            <h4>Gentlemen</h4>
+            <p>Dark suit and tie. Tuxedos welcome but not required.</p>
+          </article>
+          <article class="info-card">
+            <h4>Ladies</h4>
+            <p>Floor-length or elegant midi dresses, or a smart formal jumpsuit.</p>
+          </article>
+          <article class="info-card info-card--avoid">
+            <h4>Please avoid</h4>
+            <div class="avoid-swatches" aria-hidden="true">
+              <span style="--c:#ffffff"></span><span style="--c:#F7F6EE"></span><span style="--c:#F3EAD3"></span><span style="--c:#C8B4E0"></span>
+            </div>
+            <p>White, ivory and cream (reserved for the bride), purple and lilac (reserved for the wedding party), and anything too casual: no jeans, sneakers or thongs.</p>
+          </article>
+        </div>
+
+        <h3 class="sub-head">A little inspiration</h3>
+        <div class="moodboard">
+          <figure><img src="assets/img/inspo-berry.jpg" alt="A guest in a one-shoulder berry-pink gown with a ruffled hem on a garden terrace" loading="lazy"></figure>
+          <figure><img src="assets/img/inspo-florals.jpg" alt="Two guests in a floral maxi dress and a magenta draped gown in a rose garden" loading="lazy"></figure>
+          <figure><img src="assets/img/inspo-dusty-blue.jpg" alt="A fitted dusty-blue satin floor-length gown" loading="lazy"></figure>
+          <figure><img src="assets/img/inspo-gowns.jpg" alt="Two guests in full-length navy and teal formal gowns" loading="lazy"></figure>
+          <figure><img src="assets/img/inspo-red-cream.jpg" alt="A couple in a pleated red maxi dress and a light linen suit in a summer garden" loading="lazy"></figure>
+        </div>
+
+        <h3 class="sub-head">Practical tips for the day</h3>
+        <div class="card-grid">
+          <article class="info-card tip-card">
+            <span class="tip-icon" aria-hidden="true">🌿</span>
+            <h4>The ceremony is on grass</h4>
+            <p>Block heels, wedges or heel protectors will save you from sinking into the lawn.</p>
+          </article>
+          <article class="info-card tip-card">
+            <span class="tip-icon" aria-hidden="true">🧥</span>
+            <h4>Bring a layer</h4>
+            <p>Early November in the Southern Highlands is mild during the day, but evenings can get properly cool. A wrap, shawl or jacket is a must.</p>
+          </article>
+          <article class="info-card tip-card">
+            <span class="tip-icon" aria-hidden="true">☀️</span>
+            <h4>Sunglasses &amp; sunscreen</h4>
+            <p>For the outdoor ceremony and canapés.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FOOD & DRINK -->
+    <section class="section section--mist" id="food">
+      <div class="container narrow">
+        <header class="section-head">
+          <p class="eyebrow">Eat, drink &amp; be married</p>
+          <h2>Food &amp; Drink</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+        <ul class="menu-list">
+          <li>Canapés and drinks in the gardens straight after the ceremony</li>
+          <li>A three-course shared-style dinner</li>
+          <li>Beverage package throughout the evening</li>
+          <li>Wedding cake served with tea and coffee</li>
+        </ul>
+        <p class="center"><strong>Dietary requirements:</strong> please let us know any dietary requirements or allergies when you RSVP so the kitchen can look after you.</p>
+      </div>
+    </section>
+
+    <!-- 9. RSVP -->
+    <section class="section section--lilac" id="rsvp">
+      <div class="container narrow">
+        <header class="section-head">
+          <p class="eyebrow">Kindly reply</p>
+          <h2>RSVP</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+        <p class="lede center">Please RSVP by <strong><span class="tbc">1 August 2027</span></strong>.</p>
+        <p class="center fine">Your invitation will list the names we've reserved seats for. Please only RSVP for those named.</p>
+
+        <form class="rsvp-form" id="rsvp-form" novalidate>
+          <div class="field">
+            <label for="names">Full name(s) of guests <small>(as on your invitation)</small></label>
+            <input id="names" name="names" type="text" autocomplete="name" required>
+          </div>
+
+          <fieldset class="field">
+            <legend>Will you be attending?</legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="attending" value="Yes" required><span>Joyfully accept</span></label>
+              <label class="choice"><input type="radio" name="attending" value="No"><span>Regretfully decline</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="email">Email <small>(so we can confirm)</small></label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label for="dietary">Dietary requirements &amp; allergies</label>
+            <textarea id="dietary" name="dietary" rows="2"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="song">A song that'll get you on the dance floor</label>
+            <input id="song" name="song" type="text">
+          </div>
+
+          <fieldset class="field">
+            <legend>Staying overnight in Bowral? <small>(helps us plan any shuttle)</small></legend>
+            <div class="choice-row">
+              <label class="choice"><input type="radio" name="staying" value="Yes"><span>Yes</span></label>
+              <label class="choice"><input type="radio" name="staying" value="No"><span>No</span></label>
+              <label class="choice"><input type="radio" name="staying" value="Not sure yet"><span>Not sure yet</span></label>
+            </div>
+          </fieldset>
+
+          <div class="field">
+            <label for="message">Message for the couple <small>(optional)</small></label>
+            <textarea id="message" name="message" rows="3"></textarea>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Send RSVP</button>
+          <p class="form-status" id="form-status" role="status"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- 10. FAQs -->
+    <section class="section" id="faq">
+      <div class="container narrow">
+        <header class="section-head">
+          <p class="eyebrow">Good to know</p>
+          <h2>FAQs</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+
+        <div class="faq">
+          <details><summary>Can I bring a plus-one?</summary>
+            <p>We're keeping our celebration intimate, so we're unable to accommodate plus-ones. Only the guests named on your invitation are invited.</p></details>
+          <details><summary>Are kids invited?</summary>
+            <p>We love your little ones, but our wedding is an adults-only celebration. We hope this gives you a night off to relax and celebrate with us!</p></details>
+          <details><summary>Will the ceremony be unplugged?</summary>
+            <p><span class="tbc">Yes. We have a photographer and videographer capturing everything, so we'd love you to put your phones away during the ceremony and just be present with us. Snap away afterwards!</span></p></details>
+          <details><summary>Is there parking?</summary>
+            <p>Yes, free parking is available on site at Milton Park.</p></details>
+          <details><summary>What time should I arrive?</summary>
+            <p>Please arrive by 2:30 pm so we can begin the ceremony right at 3:00 pm.</p></details>
+          <details><summary>Can I stay at the venue?</summary>
+            <p>Yes! Book with promo code <code>WED01NOV27</code> using the link in <a href="#stay">Where to Stay</a>.</p></details>
+          <details><summary>What if it rains?</summary>
+            <p>The ceremony moves indoors to the Elms room. Everything else stays the same.</p></details>
+          <details><summary>Gifts?</summary>
+            <p>Your presence is truly the greatest gift. If you would like to give something, we'll have a wishing well at the reception.</p></details>
+          <details><summary>Who do I contact with questions?</summary>
+            <p><span class="tbc">[Name + email/phone of a designated contact, ideally someone in the wedding party.]</span></p></details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. THINGS TO DO -->
+    <section class="section section--cream" id="highlands">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">For guests making a weekend of it</p>
+          <h2>Things to Do in the Highlands</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+        <div class="card-grid card-grid--5">
+          <article class="info-card"><h4>Bowral town centre</h4><p>Cafés, boutiques and antique shops.</p></article>
+          <article class="info-card"><h4>Berrima</h4><p>A historic village a short drive away.</p></article>
+          <article class="info-card"><h4>Highlands wineries</h4><p>Cellar doors dotted around the region.</p></article>
+          <article class="info-card"><h4>Fitzroy Falls</h4><p>In Morton National Park, about 30 minutes away.</p></article>
+          <article class="info-card"><h4>Bradman Museum</h4><p>For the cricket fans.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 12. GALLERY -->
+    <section class="section" id="gallery">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow">A few of our favourites</p>
+          <h2>Gallery</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg>
+        </header>
+
+        <div class="gallery">
+          <button class="g-item" type="button"><img src="assets/img/us/cliff-stairs.jpg" alt="Kelsy and Novin on cliffside stairs above a turquoise bay" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/fairy-lights.jpg" alt="Kelsy and Novin smiling under fairy lights" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/green-dress.jpg" alt="Kelsy in a green floral dress and Novin at a sunny celebration" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/matching-shirts.jpg" alt="Kelsy and Novin in matching colourful starfish shirts by the water" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/bridge.jpg" alt="Kelsy and Novin on a walkway bridge with giant stone hands" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/selfie-red-dress.jpg" alt="A sunny selfie of Novin in a suit and Kelsy in a red dress" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/hot-chocolate.jpg" alt="Kelsy and Novin with hot chocolates in a colourful café" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/dinner.jpg" alt="Kelsy and Novin at a restaurant booth" loading="lazy"></button>
+          <button class="g-item" type="button"><img src="assets/img/us/hug.jpg" alt="Kelsy and Novin hugging and laughing" loading="lazy"></button>
+        </div>
+
+        <p class="center fine gallery-note">Engagement photos are on their way. After the wedding, you'll find the professional gallery and a place to upload your own snaps here.</p>
+      </div>
+
+      <dialog class="lightbox" id="lightbox" aria-label="Photo viewer">
+        <button class="lb-btn lb-close" type="button" aria-label="Close">×</button>
+        <button class="lb-btn lb-prev" type="button" aria-label="Previous photo">‹</button>
+        <img alt="">
+        <button class="lb-btn lb-next" type="button" aria-label="Next photo">›</button>
+      </dialog>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="monogram" aria-hidden="true">
+      <svg class="monogram-tulip"><use href="#tulip"/></svg>
+      <span>K<em>&amp;</em>N</span>
+    </div>
+    <p class="footer-date">01 · 11 · 2027</p>
+    <p class="footer-place">Ardour Milton Park · Bowral</p>
+    <a class="back-top" href="#home">Back to top ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
