@@ -544,7 +544,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
   const selector = [
     ".section-head", ".lede", ".story-photo", ".story-card", ".info-card", ".spot",
     ".venue-banner", ".venue-copy", ".map-frame", ".stay-feature", ".moodboard figure",
-    ".g-item", ".menu-list li", ".rsvp-form", ".faq details", ".sub-head", ".tip",
+    ".g-item", ".menu-course", ".diet-note", ".rsvp-form", ".faq details", ".sub-head", ".tip",
   ].join(",");
   const els = [...document.querySelectorAll(selector)].filter(
     (el) => !el.closest(".hero") && !el.classList.contains("reveal")
