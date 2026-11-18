@@ -879,3 +879,4 @@ html.gate-open .intro * { animation-play-state: paused !important; }
 .menu-when--wrap { white-space: normal; max-width: 7.5em; }
 .menu-when { font-variant-numeric: lining-nums; }
 @media (max-width: 560px) { .menu-when--wrap { max-width: none; } }
+.lede sup { font-size: .55em; vertical-align: super; line-height: 0; margin-left: .04em; }
